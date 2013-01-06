@@ -1,0 +1,4 @@
+
+build
+need to add oracle to your local maven repo:
+mvn install:install-file -Dfile=ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar
