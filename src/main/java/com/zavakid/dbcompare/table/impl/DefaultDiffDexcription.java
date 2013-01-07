@@ -109,7 +109,7 @@ public class DefaultDiffDexcription implements DiffDescription {
         }
 
         String fullTableName = source.getTable().getFullName();
-        String firstPkColumnName = source.getTable().getPkNames().get(0);
+        String firstPkColumnName = source.getTable().getMainPkName();
         String firstPkValue = source.getValue(firstPkColumnName);
         differentData = new DifferentData(fullTableName, firstPkColumnName, firstPkValue);
     }

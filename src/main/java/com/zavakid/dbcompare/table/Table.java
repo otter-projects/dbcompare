@@ -47,4 +47,6 @@ public interface Table {
 
     List<String> getPkNames();
 
+    String getMainPkName();
+
 }

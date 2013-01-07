@@ -195,4 +195,9 @@ public class DefaultMysqlTable implements Table {
         return innerTable.getColumns();
     }
 
+    @Override
+    public String getMainPkName() {
+        return pkColumn.getName();
+    }
+
 }

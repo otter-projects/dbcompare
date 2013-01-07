@@ -46,7 +46,7 @@ public class SmartCompareWorker implements Callable<Exception> {
 
         boolean right = true;
         try {
-            String where = String.format(SRC_WHERE, srcTable.getPkNames().get(0), start, size);
+            String where = String.format(SRC_WHERE, srcTable.getMainPkName(), start, size);
             Map<String, Record> srcRecords = srcTable.findRecord(where);
 
             Set<String> pks = srcRecords.keySet();
