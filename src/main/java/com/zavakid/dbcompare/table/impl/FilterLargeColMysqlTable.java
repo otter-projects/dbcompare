@@ -16,8 +16,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class FilterLargeColMysqlTable extends DefaultMysqlTable {
 
-    private static final Logger log           = LoggerFactory.getLogger(DefaultMysqlTable.class);
-    private int                 maxAcceptSize = 100;
+    private static final Logger log                     = LoggerFactory.getLogger(DefaultMysqlTable.class);
+
+    private int                 maxAcceptSize           = 256;
+    private Object              getComparingColumnsLock = new Object();
+    private Column[]            comparingColumnArray    = null;
 
     public FilterLargeColMysqlTable(JdbcTemplate jdbcTemplate, String schemaName, String tableName){
         super(jdbcTemplate, schemaName, tableName);
@@ -25,6 +28,22 @@ public class FilterLargeColMysqlTable extends DefaultMysqlTable {
 
     @Override
     protected Column[] getComapringColumn() {
+
+        if (comparingColumnArray != null) {
+            return comparingColumnArray;
+        }
+
+        synchronized (getComparingColumnsLock) {
+            if (comparingColumnArray != null) {
+                return comparingColumnArray;
+            }
+            comparingColumnArray = doGetCompareColumns();
+            return comparingColumnArray;
+
+        }
+    }
+
+    protected Column[] doGetCompareColumns() {
         Column[] all = getAllColumn();
         List<Column> comparingColumns = new ArrayList<Column>();
         for (Column col : all) {
