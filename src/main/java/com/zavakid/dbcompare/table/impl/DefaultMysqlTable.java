@@ -94,9 +94,8 @@ public class DefaultMysqlTable implements Table {
     @Override
     public int getCount() {
         String sql = String.format(COUNT_SQL, getFullName());
-        // log.info("start to query count from table : {} , sql : {}", getFullName(), sql);
         int count = jdbcTemplate.queryForInt(sql);
-        log.info("find {} records from table {}", count, getTableName());
+        // log.info("find {} records from table {}", count, getTableName());
         return count;
     }
 

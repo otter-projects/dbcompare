@@ -8,6 +8,7 @@ import java.util.concurrent.Callable;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import com.zavakid.dbcompare.common.Utils;
 import com.zavakid.dbcompare.table.DiffDescription;
@@ -42,6 +43,15 @@ public class SmartCompareWorker implements Callable<Exception> {
 
     @Override
     public Exception call() throws Exception {
+        MDC.put(Utils.LOG_SPLIT_KEY, srcTable.getFullName());
+        try {
+            return doCompare();
+        } finally {
+            MDC.remove(Utils.LOG_SPLIT_KEY);
+        }
+    }
+
+    protected Exception doCompare() {
         log.info(String.format(START_LOG, srcTable.getFullName(), start, start + size));
 
         boolean right = true;

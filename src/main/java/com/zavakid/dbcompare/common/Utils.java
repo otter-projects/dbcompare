@@ -8,6 +8,7 @@ import org.apache.commons.lang.SystemUtils;
  */
 public abstract class Utils {
 
-    public static final String SEP   = SystemUtils.LINE_SEPARATOR;
-    public static final String SPLIT = SEP + "=============================" + SEP;
+    public static final String LOG_SPLIT_KEY = "dbCompare";
+    public static final String SEP           = SystemUtils.LINE_SEPARATOR;
+    public static final String SPLIT         = SEP + "=============================" + SEP;
 }
