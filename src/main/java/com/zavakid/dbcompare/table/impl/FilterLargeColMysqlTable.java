@@ -20,7 +20,7 @@ public class FilterLargeColMysqlTable extends DefaultMysqlTable {
 
     private int                 maxAcceptSize           = 256;
     private Object              getComparingColumnsLock = new Object();
-    private Column[]            comparingColumnArray    = null;
+    private volatile Column[]   comparingColumnArray    = null;
 
     public FilterLargeColMysqlTable(JdbcTemplate jdbcTemplate, String schemaName, String tableName){
         super(jdbcTemplate, schemaName, tableName);
