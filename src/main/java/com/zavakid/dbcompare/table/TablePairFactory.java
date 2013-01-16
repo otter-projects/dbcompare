@@ -45,7 +45,7 @@ public class TablePairFactory {
             Assert.isTrue(srcTableList.size() == destTablesList.size());
         }
 
-        if (srcTableList.size() == 0) {
+        if (CollectionUtils.isEmpty(srcTableList)) {
             return Collections.emptyList();
         }
 
