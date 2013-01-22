@@ -9,3 +9,6 @@ dbcompare，即 db compare，是一个数据库之间的对比程序，原本是
 `mvn install:install-file -Dfile=ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar`
 
 然后就可以使用 mavne 进行编译
+
+## Licence
+Apache Licece 2.0
