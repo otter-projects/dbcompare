@@ -56,7 +56,7 @@ public class SmartCompareWorker implements Callable<Exception> {
 
         boolean right = true;
         try {
-            String where = String.format(SRC_WHERE, srcTable.getMainPkName(), start, size);
+            String where = generateSrcWhereSql();
             Map<String, Record> srcRecords = srcTable.findRecord(where);
 
             Set<String> pks = srcRecords.keySet();
@@ -85,5 +85,13 @@ public class SmartCompareWorker implements Callable<Exception> {
         }
 
         return null;
+    }
+
+    protected String generateSrcWhereSql() {
+        // if(){
+        //
+        // }
+        String where = String.format(SRC_WHERE, srcTable.getMainPkName(), start, size);
+        return where;
     }
 }
