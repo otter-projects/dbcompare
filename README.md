@@ -11,4 +11,4 @@ dbcompare，即 db compare，是一个数据库之间的对比程序，原本是
 然后就可以使用 mavne 进行编译
 
 ## Licence
-Apache Licece 2.0
+Apache Licence 2.0
