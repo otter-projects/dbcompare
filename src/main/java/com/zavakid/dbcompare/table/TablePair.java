@@ -22,4 +22,12 @@ public class TablePair {
         return destTable;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("src table : ").append(srcTable.getFullName());
+        sb.append(" dest table : ").append(destTable.getFullName());
+        return sb.toString();
+    }
+
 }

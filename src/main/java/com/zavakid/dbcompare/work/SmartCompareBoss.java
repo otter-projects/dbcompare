@@ -1,6 +1,7 @@
 package com.zavakid.dbcompare.work;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,10 @@ import org.slf4j.MDC;
 import org.springframework.util.Assert;
 
 import com.zavakid.dbcompare.common.Utils;
+import com.zavakid.dbcompare.config.Configuration;
+import com.zavakid.dbcompare.config.impl.StaticConfiguration;
+import com.zavakid.dbcompare.strategy.CompareStrategy;
+import com.zavakid.dbcompare.strategy.impl.DefaultCompareStrategy;
 import com.zavakid.dbcompare.table.Table;
 import com.zavakid.dbcompare.table.TablePair;
 import com.zavakid.dbcompare.table.TablePairFactory;
@@ -41,6 +46,7 @@ public class SmartCompareBoss extends CompareBoss {
 
     @Override
     public void start() throws InterruptedException {
+        // for compatible
         if (workMode.isManual()) {
             super.start();
             return;
@@ -53,7 +59,11 @@ public class SmartCompareBoss extends CompareBoss {
         for (TablePair pair : pairs) {
             MDC.put(Utils.LOG_SPLIT_KEY, pair.getSrcTable().getFullName());
             try {
-                comparePair(pair);
+                Configuration config = StaticConfiguration.create(getBatchSize(), getThreads());
+                CompareStrategy compareStrategy = new DefaultCompareStrategy();
+                compareStrategy.compare(pair, Executors.newCachedThreadPool(), config);
+            } catch (Exception e) {
+                log.error("##error when compare " + pair, e);
             } finally {
                 MDC.remove(Utils.LOG_SPLIT_KEY);
             }
