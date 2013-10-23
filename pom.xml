@@ -60,6 +60,17 @@
     <junit_version>4.11</junit_version>
   </properties>
 
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>no-commons-logging</id>
+      <name>No-commons-logging Maven Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+    </repository>
+  </repositories>
+
 
   <dependencies>
     <dependency>
