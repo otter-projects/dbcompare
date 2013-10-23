@@ -17,6 +17,7 @@ import com.google.common.collect.MapMaker;
  */
 public class DdlUtilsCache {
 
+    @SuppressWarnings("deprecation")
     private static final Map<InnerKey, Database> DATABASE_CACHE = new MapMaker().makeComputingMap(new Function<InnerKey, Database>() {
 
                                                                     @Override
