@@ -6,3 +6,4 @@ target/
 *~
 *.bak
 dist/
+ojdbc6.jar
