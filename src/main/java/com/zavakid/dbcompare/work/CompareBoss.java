@@ -36,6 +36,7 @@ public class CompareBoss implements InitializingBean, DisposableBean {
     private ExecutorService     executor  = null;
     private CompletionService   competion = null;
 
+    @SuppressWarnings("unchecked")
     public void start() throws InterruptedException {
         int total = srcJdbcTemplate.queryForInt(srcCountSql);
         int destTotal = total;
@@ -55,13 +56,6 @@ public class CompareBoss implements InitializingBean, DisposableBean {
             int start = page * batchSize;
             logger.info("[start : {} , end {}]", start, start + batchSize);
             competion.submit(buildWorker(start));
-
-            // if (page % 100 == 0) {
-            // total = srcJdbcTemplate.queryForInt(srcCountSql);
-            // destTotal = destJdbcTemplate.queryForInt(destCountSql);
-            // logger.info("[total count: {} vs {}]", total, destTotal);
-            // pages = total / batchSize + 1; // 重新更新下page
-            // }
         }
 
         for (int i = 0; i < threads; i++) {
